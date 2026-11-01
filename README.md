@@ -8,6 +8,7 @@
 - `dist/handwriting-canvas.js`：Pointer Events、多筆畫、復原、清空、裝置像素比、尺寸重繪與 PNG 匯出方法。
 - `dist/handwriting-grading.js`：自我核對積分與未來辨識服務介面。目前無自動辨識或筆順判定。
 - `dist/handwriting-storage.js`：瀏覽器本機紀錄及 JSON 匯出／匯入。
+- `dist/handwriting-selection.js`：記住各模式、課次最近出過的字，下一回合優先抽未出現的字；全部題目會重新排列。
 - `dist/sw.js`：HTTPS 首次成功載入後快取本站檔案，供離線重開。
 
 ## 使用與限制
@@ -18,6 +19,6 @@
 
 ## 測試與部署
 
-在本資料夾執行 `node test-handwriting.cjs`，涵蓋題庫、計分、錯字狀態、本機儲存、畫布多筆畫、尺寸重繪及獨立首頁。網站可將 `dist` 作為靜態網站目錄發布。Service Worker 需要 HTTPS 或 localhost。
+在本資料夾執行 `node test-handwriting.cjs`，涵蓋題庫、跨回合出題、計分、錯字狀態、本機儲存、畫布多筆畫、尺寸重繪及獨立首頁。網站可將 `dist` 作為靜態網站目錄發布。Service Worker 需要 HTTPS 或 localhost。
 
 仍需在 iPhone Safari、iPad Safari（含 Apple Pencil）、Android Chrome 及桌面瀏覽器做實機書寫驗收。
