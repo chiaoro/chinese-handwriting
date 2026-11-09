@@ -4,7 +4,7 @@
 
 ## 模組
 
-- `dist/handwriting-bank.js`：六課 101 個生字。字與注音依所附六份課本 PDF 生字欄核對；語詞和練習句並非課文原句。學習地圖缺少可獨立核對的生字欄，未編造題目。
+- `dist/handwriting-bank.js`：第一至六課 101 字（期中，依課本生字欄）＋第七至十二課 109 字（期末，依「國語期末生字表.pdf」核對，無頁碼）。字與注音依所附六份課本 PDF 生字欄核對；語詞和練習句並非課文原句。學習地圖缺少可獨立核對的生字欄，未編造題目。
 - `dist/handwriting-canvas.js`：Pointer Events、多筆畫、復原、清空、裝置像素比、尺寸重繪與 PNG 匯出方法。
 - `dist/handwriting-grading.js`：自我核對積分與未來辨識服務介面。目前無自動辨識或筆順判定。
 - `dist/handwriting-storage.js`：瀏覽器本機紀錄及 JSON 匯出／匯入。
