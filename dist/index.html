@@ -170,6 +170,55 @@ details.more summary{cursor:pointer;font-weight:700}
 dialog{border:0;border-radius:12px;padding:20px;width:min(92vw,420px);background:var(--card);color:var(--ink);box-shadow:0 20px 50px rgb(0 0 0 / .35)}
 dialog::backdrop{background:rgb(20 20 20 / .55)}
 .drow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+
+/* 首頁新版 */
+.rangebar{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--line);padding:4px;border-radius:12px;margin-top:14px}
+.rangebar button{border:0;background:transparent;border-radius:9px;padding:6px 4px;display:grid;gap:0;line-height:1.3}
+.rangebar button b{font-size:17px}
+.rangebar button small{font-size:12px;color:var(--muted)}
+.rangebar button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgb(0 0 0 / .15)}
+.rangebar button[aria-pressed="true"] b{color:var(--grid)}
+.hero2{background:var(--card);border:2px solid var(--grid);border-radius:16px;padding:16px;display:grid;gap:12px}
+.h2row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hero2 h1{font-family:var(--f-kai);font-size:clamp(26px,7vw,34px)}
+.hero2 .count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:18px}
+.hero2 .count b{font-size:28px;color:var(--ink)}
+.track.big{height:10px}
+.donechips{display:flex;gap:4px;flex-wrap:wrap}
+.donechips .chip{font-family:var(--f-kai);font-size:18px;width:32px;height:32px;display:grid;place-items:center;border-radius:6px;border:1.5px solid}
+.donechips .chip.ok{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.donechips .chip.bad{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+.sub{font-size:14px;color:var(--muted)}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.modes button{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 6px;display:grid;gap:2px;text-align:center}
+.modes button b{font-size:16px}
+.modes button small{font-size:12px;color:var(--muted);line-height:1.3}
+.modes button[aria-checked="true"]{border-color:var(--grid);background:var(--red-soft);box-shadow:inset 0 0 0 1px var(--grid)}
+.btn.huge{min-height:60px;font-size:20px;border-radius:12px}
+.link.center{justify-self:center}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border-radius:14px;padding:14px;display:grid;gap:4px;text-align:left;border:2px solid;min-height:120px;align-content:space-between}
+.tile.red{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+.tile.dark{border-color:var(--ink);background:var(--ink);color:var(--card)}
+.tile .tlabel{font-weight:700;font-size:15px}
+.tile .tbig{font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile .tbig small{font-size:15px;font-weight:500}
+.tile .tbig.small{font-size:17px;font-weight:700}
+.tile .tgo{font-size:14px;font-weight:700}
+.block{display:grid;gap:10px}
+.bhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bhead h2{font-size:19px}
+.lesson{grid-template-columns:44px 1fr auto;padding:10px 12px}
+.lesson .lnum{width:44px;height:44px;font-size:24px}
+.lesson .lnum.s{font-size:17px}
+.lmid{display:grid;gap:6px;min-width:0}
+.lmid b{font-size:17px}
+.lbar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;display:flex}
+.lbar i{display:block;height:100%}.lbar .ok{background:var(--green)}.lbar .bad{background:var(--red)}
+.howlist{margin:10px 0 6px;padding-left:1.3em;display:grid;gap:4px}
+.parent summary{color:var(--green)}
+.pz{display:grid;gap:10px;margin-top:10px}
+@media (max-width:340px){.modes small{display:none}.tile .tbig{font-size:26px}}
 [hidden]{display:none!important}
 @media (max-width:480px){.cta{grid-template-columns:1fr}.prompt .zy{font-size:26px}.prompt .words{font-size:22px}}
 @media (prefers-reduced-motion:no-preference){.btn,.nav,.mini{transition:background .15s,border-color .15s}}
@@ -206,7 +255,7 @@ const LESSONS = [
 
 const KEY='hanziWrite.v2', LOCK_MS=600, ROUND=30, EXAM_N=30, TIME_LIMIT=90;
 const RANGES={final:{name:'期末',sub:'第七～十二課'},mid:{name:'期中',sub:'第一～六課'},all:{name:'全部',sub:'第一～十二課'}};
-const MODES={normal:{name:'一般',tip:'看注音和語詞寫字，想不起來可以按描紅提示。'},trace:{name:'描紅',tip:'格子裡會有淡淡的字讓你照著描，不對答案、不記錄，適合先熟悉字形。'},adv:{name:'進階',tip:'只看注音、不給語詞和提示，每字限時 90 秒（時間到還是可以寫完）。'}};
+const MODES={normal:{name:'一般',icon:'✏️',short:'看注音和語詞',tip:'看注音和語詞寫字，想不起來可以按描紅提示。'},trace:{name:'描紅',icon:'🖍️',short:'照著描，不計分',tip:'格子裡會有淡淡的字讓你照著描，不對答案、不記錄，適合先熟悉字形。'},adv:{name:'進階',icon:'⏱️',short:'只看注音，限時',tip:'只看注音、不給語詞和提示，每字限時 90 秒（時間到還是可以寫完）。'}};
 const ALL=[];LESSONS.forEach((l,li)=>l.c.forEach(([ch,zy,words])=>ALL.push({ch,zy,words,li,id:li+'-'+ch})));
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -244,68 +293,84 @@ function render(){
 }
 
 /* ---------- 首頁 ---------- */
+// 版面順序＝孩子做事的順序：①選範圍 ②今天練 30 字（大按鈕一定在第一屏）③錯字本／最終測驗 ④分課 ⑤家長專區（收起來）
 function home(){
   $('topTitle').textContent='國語生字手寫本';
   if(!R())newRound();
   const P=pool(),ok=P.filter(isOk).length,bad=P.filter(isBad).length,n=P.length,G=RANGES[db.range];
   const rIts=R().ids.map(itById),rDone=rIts.filter(it=>doneInRound(it.id)),allDone=rDone.length===rIts.length,rBad=rDone.filter(isBad).length;
-  let h=`<div class="hero"><h1>國語生字手寫本</h1><p>六上${G.name}・${G.sub}共 ${n} 個生字。每次打開都會隨機抽 ${ROUND} 個字來寫，每一次都不一樣。</p></div>
-  <div class="setbox">
-   <div class="setrow"><span>範圍</span><div class="pills" role="group" aria-label="範圍">${Object.entries(RANGES).map(([k,v])=>`<button type="button" data-range="${k}" aria-pressed="${db.range===k}">${v.name}（${v.sub}）</button>`).join('')}</div></div>
-   <div class="setrow"><span>練習方式</span><div class="pills" role="group" aria-label="練習方式">${Object.entries(MODES).map(([k,v])=>`<button type="button" data-mode="${k}" aria-pressed="${db.mode===k}">${v.name}</button>`).join('')}</div></div>
-   <p class="modehint">${MODES[db.mode].tip}</p>
+  const E=db.exam,last=(db.examHist||[]).slice(-1)[0];
+  const examState=E&&E.status==='writing'?`寫到第 ${E.strokes.filter(x=>x&&x.length).length} / ${EXAM_N} 題`:E&&E.status==='grading'?'寫完了，等家長批改':last?`上次 ${last.s} 分`:'還沒考過';
+  const examBtn=E&&E.status==='writing'?'繼續考 →':E&&E.status==='grading'?'請家長批改 →':'開始考試 →';
+  let h=`
+  <div class="rangebar" role="group" aria-label="練習範圍">${Object.entries(RANGES).map(([k,v])=>`<button type="button" data-range="${k}" aria-pressed="${db.range===k}"><b>${v.name}</b><small>${v.sub}</small></button>`).join('')}</div>
+
+  <section class="hero2">
+    <div class="h2row"><h1>今天寫 ${ROUND} 個字</h1><span class="count">${allDone?'<span class="stamp">完成</span>':`<b>${rDone.length}</b> / ${ROUND}`}</span></div>
+    <div class="track big" aria-hidden="true"><i style="width:${rDone.length/ROUND*100}%"></i></div>
+    ${rDone.length?`<div class="donechips" aria-label="這一組寫過的字">${rDone.map(it=>`<span class="chip ${isOk(it)?'ok':'bad'}">${esc(it.ch)}</span>`).join('')}</div>`:`<p class="sub">從${G.name}的 ${n} 個字裡隨機抽，寫的時候才知道是哪一個字。</p>`}
+    <div class="modes" role="radiogroup" aria-label="練習方式">${Object.entries(MODES).map(([k,v])=>`<button type="button" role="radio" data-mode="${k}" aria-checked="${db.mode===k}"><b>${v.name}</b><small>${v.short}</small></button>`).join('')}</div>
+    ${allDone?`<p class="sub">這一組寫完了：寫對 ${rDone.length-rBad} 字${rBad?`，錯 ${rBad} 字已放進錯字本`:''}。</p>
+      <button class="btn primary huge" id="reRound" type="button">再抽 ${ROUND} 個新的字 →</button>`
+     :`<button class="btn primary huge" id="goRound" type="button">${rDone.length?`繼續寫（還有 ${ROUND-rDone.length} 字）→`:'開始寫 →'}</button>
+      <button class="link center" id="reRound" type="button">換一組字</button>`}
+  </section>
+
+  <div class="tiles">
+    <button class="tile red" id="goBad" type="button" ${bad?'':'disabled'}>
+      <span class="tlabel">錯字本</span><span class="tbig">${bad}<small> 字</small></span>
+      <span class="tgo">${bad?'把錯字再寫一次 →':'目前沒有錯字'}</span></button>
+    <button class="tile dark" id="goExam" type="button">
+      <span class="tlabel">最終測驗</span><span class="tbig small">${examState}</span>
+      <span class="tgo">${examBtn}</span></button>
   </div>
-  <div class="today"><div class="row"><h2>這一次的 ${ROUND} 字</h2>${allDone?'<span class="stamp">完成</span>':`<b style="font-size:20px;font-variant-numeric:tabular-nums">${rDone.length} / ${ROUND} 字</b>`}</div>
-   <div class="chips" aria-label="這一次要寫的字">${rIts.map(it=>{const d=doneInRound(it.id);return `<span class="chip ${d?(isOk(it)?'ok':'bad'):'todo'}">${d?esc(it.ch):'？'}</span>`}).join('')}</div>
-   <p style="font-size:14px;color:var(--muted)">${allDone?`這一組寫完了，寫對 ${rDone.length-rBad} 字${rBad?`、錯 ${rBad} 字（已放進錯字本）`:''}。想再練可以抽一組新的字。`:'字是抽籤抽出來的，寫的時候才會知道是哪一個。'}</p>
-   ${allDone?'':`<button class="btn primary" id="goRound" type="button">${rDone.length?'繼續寫這一組 →':`開始寫這 ${ROUND} 字 →`}</button>`}
-   <button class="btn" id="reRound" type="button">${allDone?`抽一組新的 ${ROUND} 字 →`:`換一組新的 ${ROUND} 字`}</button></div>
-  <details class="more"><summary>${G.name}進度：已寫 ${ok+bad} / ${n} 字</summary><div style="display:grid;gap:8px;margin-top:10px">
-  <div class="meter" aria-hidden="true"><i class="ok" style="width:${ok/n*100}%"></i><i class="bad" style="width:${bad/n*100}%"></i></div>
-  <div class="legend"><span class="lo">寫對 ${ok}</span><span class="lb">寫錯 ${bad}（在錯字本）</span><span>還沒寫 ${n-ok-bad}</span></div></div></details>
-  <div class="cta">
-    <button class="btn red" id="goBad" type="button" ${bad?'':'disabled'}>錯字本：再寫 ${bad} 字</button>
-    <button class="btn" id="goAll" type="button">一口氣寫全部 ${n} 字</button>
-  </div>
-  <label class="chk"><input type="checkbox" id="triple" ${db.triple?'checked':''}> 錯字本每個字連寫三次</label>
-  ${examCard()}
-  <h2 style="font-size:19px">分課練習</h2><div class="lessons">`;
+  <label class="chk"><input type="checkbox" id="triple" ${db.triple?'checked':''}> 寫錯字本時，每個字連寫三次</label>
+
+  <section class="block">
+    <div class="bhead"><h2>分課練習</h2><button class="link" id="goAll" type="button">${G.name}全部 ${n} 字一起寫</button></div>
+    <div class="lessons">`;
   LESSONS.forEach((l,li)=>{
     if(db.range!=='all'&&l.term!==db.range)return;
-    const its=ALL.filter(it=>it.li===li),w=its.filter(rec).length,b=its.filter(isBad).length;
-    const badge=!w?'<span class="badge">還沒寫</span>':w<its.length?`<span class="badge">寫了 ${w}/${its.length}</span>`:b?`<span class="badge fix">錯 ${b} 字</span>`:'<span class="badge done">全對 ★</span>';
-    h+=`<button class="lesson" type="button" data-l="${li}"><span class="${numCls(l.n)}">${l.n}</span><span><h3>${esc(l.t)}</h3><small>${its.length} 字・${its.slice(0,8).map(i=>i.ch).join('')}…</small></span>${badge}</button>`;
+    const its=ALL.filter(it=>it.li===li),w=its.filter(rec).length,b=its.filter(isBad).length,o=its.filter(isOk).length;
+    const badge=!w?'':w<its.length?`${w}/${its.length}`:b?`錯 ${b}`:'全對 ★';
+    h+=`<button class="lesson" type="button" data-l="${li}"><span class="${numCls(l.n)}">${l.n}</span>
+      <span class="lmid"><b>${esc(l.t)}</b><span class="lbar" aria-hidden="true"><i class="ok" style="width:${o/its.length*100}%"></i><i class="bad" style="width:${b/its.length*100}%"></i></span></span>
+      <span class="badge ${!w?'':w<its.length?'':b?'fix':'done'}">${badge||`${its.length} 字`}</span></button>`;
   });
-  h+=`</div>
-  <button class="btn green" id="goParent" type="button">給家長看：檢查孩子寫的字</button>
-  <div class="how"><b>怎麼寫</b><ol>
-   <li>先選範圍（期末、期中或全部）和練習方式。每次打開都會隨機抽 ${ROUND} 字，按「開始寫」。</li>
-   <li>看上方的注音和語詞，想想是哪個字。</li>
-   <li>用手指或觸控筆寫在田字格裡。寫歪了可以按「擦掉一筆」或「全部擦掉」。</li>
-   <li>真的想不起來，可以按「描紅提示」，格子裡會出現淡淡的字讓你描（這個字會留在錯字本）。</li>
-   <li>按「寫好了，對答案」，比對你的字和課本的字，再選「寫對了」或「寫錯了」。寫錯的字會進錯字本。</li>
-   <li>要按「下一字」才會換字，不會因為不小心碰到就跳走。</li>
-   <li>考前做一次「最終測驗」，請家長批改，看看能拿幾分。</li></ol>
-   <p style="font-size:14px;color:var(--muted)">字形用臺灣教育部標準楷書（有標楷體就顯示標楷體）。部首、筆畫有疑問時，以課本為準。</p></div>
-  <details class="more"><summary>紀錄備份（換平板或換瀏覽器時用）</summary>
-   <p style="font-size:14px;color:var(--muted);margin-top:8px">紀錄只存在這臺裝置的這個瀏覽器。換裝置前先「匯出紀錄」，再到新裝置「匯入紀錄」。匯入會蓋掉新裝置原本的紀錄。</p>
+  h+=`</div></section>
+
+  <details class="more"><summary>怎麼寫？</summary><ol class="howlist">
+   <li>選好範圍和練習方式，按「開始寫」。</li>
+   <li>看注音和語詞，用手指或觸控筆寫在田字格裡；寫歪了按「擦掉一筆」。</li>
+   <li>寫好按「對答案」，比比看自己的字和課本的字，選「寫對了」或「寫錯了」。</li>
+   <li>要按「下一字」才會換字，不小心碰到也不會跳走。</li>
+   <li>寫錯的字會進錯字本；考前做一次「最終測驗」，請家長批改。</li></ol>
+   <p class="sub">字形以臺灣教育部標準楷書顯示，有疑問時以課本為準。</p></details>
+
+  <details class="more parent"><summary>家長專區</summary><div class="pz">
+   <button class="btn green" id="goParent" type="button">檢查孩子寫的字</button>
+   <div class="meter" aria-hidden="true"><i class="ok" style="width:${ok/n*100}%"></i><i class="bad" style="width:${bad/n*100}%"></i></div>
+   <div class="legend"><span class="lo">寫對 ${ok}</span><span class="lb">寫錯 ${bad}</span><span>還沒寫 ${n-ok-bad}</span><span>（${G.name}共 ${n} 字）</span></div>
+   ${(db.examHist||[]).length?`<p class="sub">測驗紀錄：${db.examHist.slice(-5).map(x=>`${x.d}${x.r?' '+x.r:''} ${x.s} 分`).join('、')}</p>`:''}
+   <p class="sub">紀錄只存在這臺裝置的這個瀏覽器。換裝置前先匯出，再到新裝置匯入（會蓋掉新裝置原本的紀錄）。</p>
    <div class="backup"><button class="btn" id="exportBtn" type="button">匯出紀錄</button><label class="file">匯入紀錄<input type="file" id="importIn" accept="application/json,.json"></label></div>
-   <p id="backupMsg" role="status" style="font-size:14px;margin-top:6px"></p></details>
-  <button class="reset" id="resetAll" type="button">清除全部紀錄</button>
-  <p style="font-size:13px;color:var(--muted);text-align:center">舊版「生字手寫闖關」還可以從 <a href="classic/">這裡</a> 打開（紀錄分開）。</p>`;
+   <p id="backupMsg" role="status" class="sub"></p>
+   <button class="reset" id="resetAll" type="button">清除全部紀錄</button>
+   <p class="sub">舊版「生字手寫闖關」：<a href="classic/">打開舊版</a>（紀錄分開）</p>
+  </div></details>`;
   $('app').innerHTML=h;
   document.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{db.range=b.dataset.range;if(!R())newRound();save();render()});
   document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{db.mode=b.dataset.mode;save();render()});
   $('triple').onchange=e=>{db.triple=e.target.checked;save()};
-  if($('goRound'))$('goRound').onclick=()=>{const q=R().ids;const f=q.findIndex(id=>!doneInRound(id));go({name:'write',queue:q,at:f<0?0:f,label:`這一次的 ${ROUND} 字`,round:true,mode:db.mode})};
+  if($('goRound'))$('goRound').onclick=()=>{const q=R().ids;const f=q.findIndex(id=>!doneInRound(id));go({name:'write',queue:q,at:f<0?0:f,label:`今天的 ${ROUND} 字`,round:true,mode:db.mode})};
   $('reRound').onclick=()=>{const go2=()=>{newRound();render()};if(rDone.length&&!allDone)confirmBox('要換一組新的字嗎？',`這一組還有 ${ROUND-rDone.length} 字沒寫。已經寫過的字會保留紀錄。`,'換新的',go2);else go2()};
   $('goAll').onclick=()=>{const q=P.map(i=>i.id);const next=P.find(it=>!rec(it));go({name:'write',queue:q,at:next?q.indexOf(next.id):0,label:`${G.name}全部生字`,mode:db.mode})};
   $('goBad').onclick=()=>{let q=P.filter(isBad).map(i=>i.id);if(db.triple)q=q.flatMap(id=>[id,id,id]);go({name:'write',queue:q,at:0,label:'錯字本',mode:db.mode==='trace'?'normal':db.mode})};
   document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{const li=+b.dataset.l;const q=ALL.filter(i=>i.li===li);const f=q.findIndex(i=>!rec(i));go({name:'write',queue:q.map(i=>i.id),at:f<0?0:f,label:`第${LESSONS[li].n}課 ${LESSONS[li].t}`,mode:db.mode})});
-  bindExamCard();
+  $('goExam').onclick=openExam;
   $('goParent').onclick=()=>go({name:'parent',filter:'written'});
   $('exportBtn').onclick=()=>{try{const blob=new Blob([JSON.stringify(db)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='國語生字手寫本紀錄.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);$('backupMsg').textContent='已匯出，檔案在「下載」資料夾。'}catch(e){$('backupMsg').textContent='這個瀏覽器不能匯出檔案。'}};
-  $('importIn').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||!d.c)throw 0;confirmBox('要匯入這份紀錄嗎？','這臺裝置原本的紀錄會被蓋掉，不能復原。','匯入',()=>{db=d;db.rounds=db.rounds||{};save();render();$('backupMsg').textContent='匯入成功。'})}catch(_){$('backupMsg').textContent='匯入失敗：請選擇這個網站匯出的紀錄檔。'}e.target.value=''};
+  $('importIn').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||!d.c)throw 0;confirmBox('要匯入這份紀錄嗎？','這臺裝置原本的紀錄會被蓋掉，不能復原。','匯入',()=>{db=d;db.rounds=db.rounds||{};save();render()})}catch(_){$('backupMsg').textContent='匯入失敗：請選擇這個網站匯出的紀錄檔。'}e.target.value=''};
   $('resetAll').onclick=()=>confirmBox('要清除全部紀錄嗎？','孩子寫過的字、對錯、錯字本和測驗成績都會清掉，不能復原。建議先匯出備份。','清除',()=>{db={c:{},range:db.range,mode:db.mode,rounds:{}};save();render()});
 }
 
@@ -328,7 +393,7 @@ function write(){
   <div class="boardwrap" id="bw">
    <div class="board" id="board"><div class="ghost" id="ghost" ${hint?'':'hidden'}>${esc(it.ch)}</div><canvas id="cv" aria-label="田字格，在這裡寫「${esc(it.zy)}」"></canvas></div>
    <div class="tools"><button class="mini" id="undo" type="button">↶ 擦掉一筆</button><button class="mini" id="clear" type="button">全部擦掉</button>${mode==='normal'?'<button class="mini" id="hintBtn" type="button" aria-pressed="false">描紅提示</button>':''}</div>
-   <button class="link" id="diagBtn" type="button" style="font-size:13px">寫不出來？按這裡看看</button><pre id="diag" hidden style="font-size:12px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;margin:0;white-space:pre-wrap;min-height:3em"></pre>
+   <button class="link" id="diagBtn" type="button" style="font-size:13px">格子畫不出線？按這裡</button><pre id="diag" hidden style="font-size:12px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;margin:0;white-space:pre-wrap;min-height:3em"></pre>
   </div>
   <div class="check" id="check" hidden></div>`;
   setupCanvas();
@@ -435,24 +500,16 @@ function finishRound(){
 }
 
 /* ---------- 最終測驗 ---------- */
-function examCard(){
-  const E=db.exam,hist=(db.examHist||[]).slice(-5),G=RANGES[db.range];
-  let state='';
-  if(E&&E.status==='writing'){const d=E.strokes.filter(x=>x&&x.length).length;state=`<button class="btn" id="exGo" type="button">繼續測驗（${RANGES[E.range]?.name||''}，已寫 ${d} / ${EXAM_N}）→</button><button class="link" id="exNew" type="button" style="color:var(--card);opacity:.8">放棄這次，重新抽題</button>`}
-  else if(E&&E.status==='grading')state=`<button class="btn" id="exGrade" type="button">請家長批改 →</button>`;
-  else state=`<button class="btn" id="exNew" type="button">開始${G.name}最終測驗 →</button>`;
-  return `<div class="examcard"><h2>最終測驗</h2><p>從${G.name}的 ${pool().length} 字隨機抽 ${EXAM_N} 字，沒有描紅、沒有提示、寫的時候不能看答案。全部寫完交卷，由家長批改，滿分 100 分。</p>
-   ${hist.length?`<div class="hist">${hist.map(h=>`<span>${h.d}${h.r?' '+h.r:''}　${h.s} 分</span>`).join('')}</div>`:''}${state}</div>`;
+function openExam(){
+  const E=db.exam;
+  if(E&&E.status==='writing'){
+    const f=E.strokes.findIndex(x=>!x||!x.length);
+    return confirmBox('最終測驗',`你已經寫到第 ${E.strokes.filter(x=>x&&x.length).length} / ${EXAM_N} 題（${RANGES[E.range]?.name||''}）。`,'繼續考',()=>go({name:'exam',at:f<0?0:f}),'放棄重考',()=>confirmBox('要放棄這次測驗嗎？','已經寫的字會清掉，重新抽一組新的字。','重新抽題',startExam));
+  }
+  if(E&&E.status==='grading')return go({name:'grade'});
+  confirmBox('準備好考試了嗎？',`從${RANGES[db.range].name}的 ${pool().length} 字抽 ${EXAM_N} 字，<b>沒有描紅、沒有提示</b>。寫錯可以擦掉，也可以回上一題改；交卷後由家長批改，滿分 100 分。`,'開始考試',startExam,'還沒');
 }
-function bindExamCard(){
-  if($('exGo'))$('exGo').onclick=()=>{const f=db.exam.strokes.findIndex(x=>!x||!x.length);go({name:'exam',at:f<0?0:f})};
-  if($('exGrade'))$('exGrade').onclick=()=>go({name:'grade'});
-  if($('exNew'))$('exNew').onclick=()=>{
-    const start=()=>{db.exam={status:'writing',range:db.range,ids:shuffle(pool().map(i=>i.id)).slice(0,EXAM_N),strokes:Array(EXAM_N).fill(null),start:Date.now()};save();go({name:'exam',at:0})};
-    if(db.exam&&db.exam.status==='writing')confirmBox('要放棄這次測驗嗎？','已經寫的字會清掉，重新抽一組新的字。','重新抽題',start);
-    else confirmBox('準備好了嗎？',`範圍是${RANGES[db.range].name}，一共 ${EXAM_N} 字，寫的時候沒有任何提示。寫錯可以擦掉重寫，也可以回上一題修改，交卷後就不能改了。`,'開始測驗',start,'還沒');
-  };
-}
+function startExam(){db.exam={status:'writing',range:db.range,ids:shuffle(pool().map(i=>i.id)).slice(0,EXAM_N),strokes:Array(EXAM_N).fill(null),start:Date.now()};save();go({name:'exam',at:0})}
 function exam(){
   const E=db.exam;if(!E||E.status!=='writing')return go({name:'home'});
   const at=view.at,it=itById(E.ids[at]);
